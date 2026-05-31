@@ -263,10 +263,15 @@ export class Orchestrator {
       return { nodeId: node.id, ok: false, text: `(failed: ${message})`, error: message };
     }
 
-    // Review → rework loop: a strict reviewer can send the result back.
-    const reviewTokens = await this.reviewAndRework(node, () => outcome.text, async (reason) => {
-      outcome = await this.withNodeRetry(node, 'execute', () => executeNode(node, this.agentDeps, reason));
-    });
+    // Review → rework loop, but ONLY for leaves that did real tool work
+    // (i.e. likely produced or changed artifacts). Pure-text leaves skip the
+    // reviewer to cut LLM cost roughly in half on large swarms.
+    let reviewTokens = 0;
+    if (outcome.toolCalls > 0) {
+      reviewTokens = await this.reviewAndRework(node, () => outcome.text, async (reason) => {
+        outcome = await this.withNodeRetry(node, 'execute', () => executeNode(node, this.agentDeps, reason));
+      });
+    }
 
     this.totalTokens += planTokens + outcome.tokens + reviewTokens;
     this.patch(node, {
