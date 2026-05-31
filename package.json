@@ -44,7 +44,7 @@
     "build:server": "tsc -p packages/server",
     "build:web": "npm run build -w @thanatos/web",
     "build": "npm run build:core && npm run build:server && npm run build:web",
-    "typecheck": "tsc -p packages/core --noEmit && tsc -p packages/server --noEmit",
+    "typecheck": "npm run build:core && tsc -p packages/server --noEmit",
     "prestart": "npm run build:core && npm run build:server",
     "start": "node packages/server/dist/index.js"
   },
