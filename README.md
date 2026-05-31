@@ -1,5 +1,10 @@
 # Thanatos
 
+[![CI](https://github.com/ZephyrZeno/Thanatos/actions/workflows/ci.yml/badge.svg)](https://github.com/ZephyrZeno/Thanatos/actions/workflows/ci.yml)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![Node](https://img.shields.io/badge/node-%E2%89%A520-brightgreen.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-ESM-3178c6.svg)
+
 **A hierarchical multi-agent system that orchestrates hundreds to thousands of LLM agents as if they were a single, far more powerful model.**
 
 Thanatos takes one goal, has a *central agent* design an org chart for it on the fly, and recursively fans the work out across departments → sub‑teams → individual workers. The agents plan, write and edit real code, run builds and tests, use tools and MCP servers, review each other's work, and stream everything back to a live visualization dashboard.
@@ -54,6 +59,19 @@ A TypeScript / Node.js monorepo (ESM, Node ≥ 20):
 | `web` | React + Vite dashboard (`@xyflow/react` for the 2D graph, `three.js` for the 3D view). |
 
 **Lifecycle of a run:** `plan` (decompose into a named sub-org) → `delegate` (spawn children with precise, file-level missions) → `execute` (leaf workers use tools to do real work) → `aggregate` (each parent synthesizes its children into one concise result) → `review` (judge & optionally rework) → the central node emits the final answer and writes `FINAL_REPORT.md` to the workspace.
+
+### Repository layout
+
+```text
+packages/
+  core/      # engine: orchestrator, agent loop, LLM client, tools, MCP, prompts, events
+  server/    # Express + WebSocket API; serves the built web UI
+web/         # React + Vite dashboard (2D @xyflow / 3D three.js graph, chat, logs, workspace)
+docs/        # screenshot used in this README
+.github/     # CI workflow (typecheck + build)
+.env.example                 # copy to .env and add your key (gitignored)
+mcp.config.example.json      # copy to mcp.config.json to attach MCP servers
+```
 
 ---
 
@@ -113,3 +131,7 @@ Optional: copy `mcp.config.example.json` → `mcp.config.json` to attach externa
 ## Status
 
 Experimental research project. Running in `live` mode against hundreds of agents makes a large number of real model calls and can be slow and token-expensive — start small (`THANATOS_LLM_MODE=mock`, or a low `规模`/scale in the UI) before scaling up. No API key or secret is committed to this repository; `.env` is gitignored and `.env.example` ships placeholders only.
+
+## License
+
+[MIT](LICENSE) © ZephyrZeno

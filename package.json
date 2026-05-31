@@ -2,7 +2,29 @@
   "name": "thanatos",
   "version": "0.1.0",
   "private": true,
-  "description": "Thanatos — a hierarchical multi-agent team that behaves like a single powerful model.",
+  "description": "Thanatos — a hierarchical multi-agent system that orchestrates hundreds to thousands of LLM agents as one.",
+  "license": "MIT",
+  "author": "ZephyrZeno",
+  "homepage": "https://github.com/ZephyrZeno/Thanatos#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZephyrZeno/Thanatos.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZephyrZeno/Thanatos/issues"
+  },
+  "keywords": [
+    "multi-agent",
+    "agents",
+    "llm",
+    "orchestration",
+    "agent-swarm",
+    "hierarchical",
+    "mcp",
+    "typescript",
+    "openai",
+    "visualization"
+  ],
   "type": "module",
   "workspaces": [
     "packages/*",
