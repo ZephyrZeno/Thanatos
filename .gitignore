@@ -1,0 +1,27 @@
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.local
+.DS_Store
+.cache/
+coverage/
+*.tsbuildinfo
+runs/
+.scratch/
+web/dist/
+
+# Agent runtime data — per-conversation workspaces (cloned repos, generated files).
+workspace/
+
+# Local-only config (may reference machine paths); commit the .example instead.
+mcp.config.json
+
+# Secrets / local env (only .example is committed)
+.env.*
+!.env.example
+
+# Editor / agent tooling config and stray runtime logs
+.cursor/
+logs/

@@ -1,0 +1,23 @@
+{
+  "name": "@thanatos/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@thanatos/core": "*",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/ws": "^8.18.1"
+  }
+}

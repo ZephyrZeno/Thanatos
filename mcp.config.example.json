@@ -1,0 +1,15 @@
+{
+  "_comment": "Copy to mcp.config.json to expose external MCP servers' tools to every agent. Each server is launched over stdio. Set THANATOS_MCP_CONFIG to use a different path. Set disabled:true to skip one.",
+  "servers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./runs"],
+      "disabled": false
+    },
+    "everything": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-everything"],
+      "disabled": true
+    }
+  }
+}

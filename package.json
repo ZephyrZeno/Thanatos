@@ -1,0 +1,35 @@
+{
+  "name": "thanatos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Thanatos — a hierarchical multi-agent team that behaves like a single powerful model.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "web"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "demo": "tsx packages/core/src/demo.ts",
+    "predev:server": "npm run build:core",
+    "dev:server": "tsx watch packages/server/src/index.ts",
+    "dev:web": "npm run dev -w @thanatos/web",
+    "predev": "npm run build:core",
+    "dev": "concurrently -n server,web -c blue,magenta \"tsx watch packages/server/src/index.ts\" \"npm:dev:web\"",
+    "build:core": "tsc -p packages/core",
+    "build:server": "tsc -p packages/server",
+    "build:web": "npm run build -w @thanatos/web",
+    "build": "npm run build:core && npm run build:server && npm run build:web",
+    "typecheck": "tsc -p packages/core --noEmit && tsc -p packages/server --noEmit",
+    "prestart": "npm run build:core && npm run build:server",
+    "start": "node packages/server/dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "concurrently": "^10.0.0",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
+  }
+}
